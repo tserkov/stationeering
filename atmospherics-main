@@ -1,0 +1,54 @@
+alias wasteTank d0
+alias icFilter d1
+alias debug d5
+
+main:
+# Enable filtration based on waste pressure
+l r0 wasteTank Pressure
+bgtzal r0 enableFilters
+beqzal r0 disableFilters
+
+yield
+j main
+
+enableFilters:
+alias bitmap r0
+alias v r1
+move bitmap 0
+
+l v wasteTank RatioVolatiles
+sgtz v v
+mul v v 1
+add bitmap bitmap v
+
+l v wasteTank RatioOxygen
+sgtz v v
+mul v v 2
+add bitmap bitmap v
+
+l v wasteTank RatioNitrogen
+sgtz v v
+mul v v 4
+add bitmap bitmap v
+
+l v wasteTank RatioCarbonDioxide
+sgtz v v
+mul v v 8
+add bitmap bitmap v
+
+l v wasteTank RatioNitrousOxide
+sgtz v v
+mul v v 16
+add bitmap bitmap v
+
+l v wasteTank RatioPollutant
+sgtz v v
+mul v v 32
+add bitmap bitmap v
+
+s icFilter Setting bitmap
+j ra
+
+disableFilters:
+s icFilter Setting 0
+j ra
