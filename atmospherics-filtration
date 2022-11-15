@@ -1,0 +1,43 @@
+alias h2 d0
+alias o2 d1
+alias n2 d2
+alias co2 d3
+alias n2o d4
+alias x d5
+
+alias bitmap r0
+alias bitset r1
+
+main:
+l bitmap db Setting
+
+mod bitset bitmap 2 # %2
+s h2 On bitset
+
+div bitmap bitmap 2 # /2
+floor bitmap bitmap
+mod bitset bitmap 2 # %2
+s o2 On bitset
+
+div bitmap bitmap 2
+floor bitmap bitmap
+mod bitset bitmap 2
+s n2 On bitset
+
+div bitmap bitmap 2
+floor bitmap bitmap
+mod bitset bitmap 2
+s co2 On bitset
+
+div bitmap bitmap 2
+floor bitmap bitmap
+mod bitset bitmap 2
+s n2o On bitset
+
+div bitmap bitmap 2
+floor bitmap bitmap
+mod bitset bitmap 2
+s x On bitset
+
+yield
+j main
